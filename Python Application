@@ -1,0 +1,43 @@
+pip install boto3
+
+
+import os
+import boto3
+from botocore.exceptions import ClientError
+
+
+
+access_key = ''
+access_secret= ''
+bucket_name = ''
+
+// connect to s3 service
+client_s3= boto3.client(
+	's3',
+	aws_access_key_id= access_key,  //IAM 
+	aws_secret_access_key=access_secret
+)
+	
+//upload file to s3 bucket
+data_file_folder = os.path.join(os.getcwd), 'Data Files'
+for file in os.listdir(data_file_folder):
+	if not file.startswit('~'):
+		try:
+			print('Uploading files(0)...'.format(file))
+			client_s3.upload_file(
+				os.path.join(data_file_folder, file),
+				bucket_name,
+				file
+			)
+		
+		except ClientError as e:
+			print('Credential is incorrect')
+			print(e)
+		except exception as e:
+			print(e)
+
+
+// downloading file
+
+Cliet_s3.download_file(bucket_name,'file_name', os.path.join.'./dir_name', givefilename)			
+			
